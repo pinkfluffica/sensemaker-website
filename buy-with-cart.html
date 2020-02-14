@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
+	<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova|Rubik&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<title>Buy Now</title>
+</head>
+<body>
+	<div class="main">
+		<div class="hero">
+			<div class="content">
+				<h1>Buy membership now</h1>
+				<p>Some text</p>
+				<div class="wrap" style="">
+				
+					<div class="buying-options"><p>Membership £25</p><button id="memberFee">Add to cart</button></div>
+					<div class="buying-options"><p>Day pass £10</p><button id="dayFee">Add to cart</button></div>
+					<div class="buying-options"><p>Supporter's donation £5</p><button id="giftFee">Add to cart</button></div>
+					<div class="cart-summary">
+						<ul class="cart-list">Your cart items:
+							
+							
+						</ul>
+						<p>Total: <span id="cartTotal"></span></p>
+					</div>
+					<div class="paypal-container" id="payPalContainer"></div>
+					<div class="error" id="paymentError"><p>Sorry, there appears to be an error, please reload the page and try again</p></div>
+					
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script
+    src="https://www.paypal.com/sdk/js?client-id=AfWh3KlAZFTLdAoZLyIygPbGYWktqPT5uIOIYTKVTYKSb1oI1ok-DGJ7-sL_PV5vggT5PrjO_oahGfUy&currency=GBP"> 
+    // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+	</script>
+	<script>
+		paypal.Buttons({
+		    createOrder: function(data, actions) {
+		      // This function sets up the details of the transaction, including the amount and line item details.
+		      return actions.order.create({
+		        purchase_units: [{
+		          amount: {
+		            value: '0.01'
+		          }
+		        }]
+		      });
+		    },
+		    onApprove: function(data, actions) {
+		      // This function captures the funds from the transaction.
+		      return actions.order.capture().then(function(details) {
+		        // This function shows a transaction success message to your buyer.
+		        alert('Transaction completed by ' + details.payer.name.given_name);
+		      });
+		    },
+		    onError: function (err) {
+		    	console.log("This is an error:", err)
+		    	document.getElementById('paymentError').classList.add('visible');
+	    	// Show an error page here, when an error occurs
+		  	}
+		  }).render('#payPalContainer');
+		// This function displays Smart Payment Buttons on your web page.
+
+		var memberFee = document.getElementById('memberFee');
+		var dayFee = document.getElementById('dayFee');
+		var giftFee = document.getElementById('giftFee');
+		memberFee.addEventListener("click", addToCart);
+		dayFee.addEventListener("click", addToCart);
+		giftFee.addEventListener("click", addToCart);
+		// memberFee.addEventListener("keyup", addToCart);
+
+		var cartList = document.querySelector('.cart-list');
+		console.log('cartlist is' + cartList)
+
+		function addToCart(event) {
+			console.log('clicked!')
+			console.log(event.target.id);
+			var item = document.createElement("LI");
+			if (event.target.id == 'memberFee' ) {
+				console.log('£25');
+				var itemText = document.createTextNode("Membership for £25");
+				item.appendChild(itemText);
+				cartList.appendChild(item);
+
+			}
+			else if (event.target.id == 'dayFee' ) {
+				console.log('£10');
+				var itemText = document.createTextNode("Day ticket for £10");
+				item.appendChild(itemText);
+				cartList.appendChild(item);
+
+			}
+			else if (event.target.id == 'giftFee' ) {
+				console.log('£5');
+				var itemText = document.createTextNode("Donation fee for £5");
+				item.appendChild(itemText);
+				cartList.appendChild(item);
+
+			}
+			else {
+				console.log('nothing happened');
+			}
+			
+		}
+
+	</script>
+</body>
+</html>

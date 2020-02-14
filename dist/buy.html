@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
+	<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova|Rubik&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<title>Sense-Maker Workshop | Buy Now</title>
+</head>
+<body>
+	<div class="main">
+		<div class="hero">
+			<div class="content buy">
+				
+				<h1>Buy Tickets</h1>
+				
+				
+					<p>Buy access for a full week, which includes the headline event or buy access for one day, to be redeemed on the day of your choice.</p>
+					<!-- <p>Daily access tickets will also be available, giving entry for coworking, discussions or just hanging out for one day only. Day tickets do not give access to the headline event, which will have separate tickets.</p> -->
+					
+				
+				
+				<div class="wrap">
+				
+					<div class="buying-options"><p>Membership &pound;25</p></div>
+					
+					<div class="paypal-container" id="payPalContainer1"></div>
+					<div class="error" id="paymentError"><p>Sorry, there appears to be an error, please reload the page and try again</p></div>
+					
+				</div>
+				<div class="wrap">
+				
+					<div class="buying-options"><p>Day access &pound;10</p></div>
+					
+					<div class="paypal-container" id="payPalContainer2"></div>
+					<div class="error" id="paymentError"><p>Sorry, there appears to be an error, please reload the page and try again</p></div>
+					
+				</div>
+				<div class="wrap">
+				
+					<div class="buying-options"><p>Friday night special &pound;15</p></div>
+					
+					<div class="paypal-container" id="payPalContainer3"></div>
+					<div class="error" id="paymentError"><p>Sorry, there appears to be an error, please reload the page and try again</p></div>
+					
+				</div>
+			<a href="index.html">Back</a>
+				
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script
+    src="https://www.paypal.com/sdk/js?client-id=ATSIJ_1Otqk93RKkv0iTWNQ1oSSo0alaS3JMRDIZQhkB-JQLp8WouiWsd3xKg6YWf2G9hTRBOy8Lyx4v&currency=GBP"> 
+	</script>
+	<script>
+		paypal.Buttons({
+		    createOrder: function(data, actions) {
+		      // This function sets up the details of the transaction, including the amount and line item details.
+		      return actions.order.create({
+		        purchase_units: [{
+		          amount: {
+		            value: '25.00'
+		          }
+		        }]
+		      });
+		    },
+		    onApprove: function(data, actions) {
+		      // This function captures the funds from the transaction.
+		      return actions.order.capture().then(function(details) {
+		        // This function shows a transaction success message to your buyer.
+		        alert('Thank you for your purchase ' + details.payer.name.given_name);
+		      });
+		    },
+		    onError: function (err) {
+		    	console.log("This is an error:", err)
+		    	document.getElementById('paymentError').classList.add('visible');
+	    	// Show an error page here, when an error occurs
+		  	},
+		  	style: {
+			    color:   'blue',
+			  }
+		  }).render('#payPalContainer1');
+		// This function displays Smart Payment Buttons on your web page.
+
+		paypal.Buttons({
+		    createOrder: function(data, actions) {
+		      // This function sets up the details of the transaction, including the amount and line item details.
+		      return actions.order.create({
+		        purchase_units: [{
+		          amount: {
+		            value: '10.00'
+		          }
+		        }]
+		      });
+		    },
+		    onApprove: function(data, actions) {
+		      // This function captures the funds from the transaction.
+		      return actions.order.capture().then(function(details) {
+		        // This function shows a transaction success message to your buyer.
+		        alert('Thank you for your purchase ' + details.payer.name.given_name);
+		      });
+		    },
+		    onError: function (err) {
+		    	console.log("This is an error:", err)
+		    	document.getElementById('paymentError').classList.add('visible');
+	    	// Show an error page here, when an error occurs
+		  	},
+		  	style: {
+			    color:   'blue',
+			  }
+		  }).render('#payPalContainer2');
+		// This function displays Smart Payment Buttons on your web page.
+
+
+		paypal.Buttons({
+		    createOrder: function(data, actions) {
+		      // This function sets up the details of the transaction, including the amount and line item details.
+		      return actions.order.create({
+		        purchase_units: [{
+		          amount: {
+		            value: '15.00'
+		          }
+		        }]
+		      });
+		    },
+		    onApprove: function(data, actions) {
+		      // This function captures the funds from the transaction.
+		      return actions.order.capture().then(function(details) {
+		        // This function shows a transaction success message to your buyer.
+		        alert('Thank you for your purchase ' + details.payer.name.given_name);
+		      });
+		    },
+		    onError: function (err) {
+		    	console.log("This is an error:", err)
+		    	document.getElementById('paymentError').classList.add('visible');
+	    	// Show an error page here, when an error occurs
+		  	},
+		  	style: {
+			    color:   'blue',
+			  }
+		  }).render('#payPalContainer3');
+		// This function displays Smart Payment Buttons on your web page.
+
+
+
+	</script>
+</body>
+</html>

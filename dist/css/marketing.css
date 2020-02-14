@@ -1,0 +1,43 @@
+/*CSS*/
+:root {
+  --grey: #EFE9E7;
+  --pale1: #DAE0F2 ;
+  --pale2: #F9CFF2 ;
+  --dark1: #52154E ;
+  --dark2: #111344 ;
+}
+
+body {
+    font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    color: var(--dark2);
+}
+
+
+.section {
+    min-height: 45vh;
+    text-align: center;
+    padding: 10vh 0;
+}
+
+.section:nth-child(odd) {
+    background-color: var(--pale2);
+}
+
+.section:nth-child(even) {
+    background-color: var(--pale1);
+}
+
+.pure-menu-horizontal {
+    text-align: right;
+}
+
+.splash {
+    /*background-color: var(--pale1);*/
+}
+
+.splash .text {
+    /*padding-top: 20vh;*/
+}
